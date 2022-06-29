@@ -1,7 +1,7 @@
 const config   = require("./config.json");
 const net      = require('net');
-const Discord  = require('discord.js'); 
-const client   = new Discord.Client( { intents: ["GUILDS", "GUILD_MESSAGES"]  } );  
+const Discord  = require('discord.js');
+const client   = new Discord.Client( { intents: ["GUILDS", "GUILD_MESSAGES"]  } );
 
 client.on("ready", function()
 {
@@ -10,36 +10,53 @@ client.on("ready", function()
 
 client.login(config.token);
 
-let buff = new Buffer([0xFF, 0xFF, 0xFF, 0xFF]); 
+let buff = Buffer.from( [0xFF, 0xFF, 0xFF, 0xFF] );
+let onlineLast = 0;
 
 function bot_FOnline()
 {
     var connection = new net.Socket();
     connection.setTimeout(10000);
-	
-    connection.connect(config.serverPort, config.serverAddress, function () 
-	{
+    connection.connect(config.serverPort, config.serverAddress, function ()
+    {
         console.log(`Writing ${buff}`)
-        connection.write(buff); 
+        connection.write(buff);
     });
-    
-	connection.on('data', function (data) 
+
+	connection.on('data', function (data)
 	{
         console.log('Received: ' + data);
 
-        var buffer = new Buffer('', 'hex');
+        var buffer = Buffer.from(' ', "hex" );
         buffer = Buffer.concat(
         [
-            buffer, new Buffer(data, 'hex')
+            buffer, Buffer.from(data, "hex" )
         ]);
 
         online = buffer.readUInt32LE(0);
+        uptimeRaw = buffer.readUInt32LE(4);
         
-        console.log("Online is " +online)
-
         if (online != '') 
-		{
-            client.user.setActivity("Online: " +online)
+	    {
+            console.log("Online: " + online);
+
+            var date = new Date( Math.round( uptimeRaw * 1000 ) );
+            uptimeString = "Up: " + date.getHours() + "h";
+            console.log(uptimeString);
+
+            if( onlineLast < online && (online - onlineLast) > 5 )
+                changeString = "Ch: ⇑";
+            else if( onlineLast < online ) 
+                changeString = "Ch: ⇗";
+            else if( onlineLast > online && (onlineLast - online) > 5  )
+                changeString = "Ch: ⇓";
+            else if( onlineLast > online )
+                changeString = "Ch: ⇘";
+            else
+                changeString = "Ch: -";
+
+            client.user.setActivity(online + " " + changeString + " " + uptimeString);
+            onlineLast = online;
         }
         connection.destroy();
     });
@@ -50,6 +67,6 @@ function bot_FOnline()
         connection.destroy();
     });
 
-	setTimeout(bot_FOnline, 50000);
+	setTimeout(bot_FOnline, 60000);
 }
 
