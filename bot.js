@@ -64,7 +64,7 @@ function bot_FOnline()
             else
                 changeString = `-`;
 
-            client.user.setActivity(`O: ${online} | CH: ${changeString} | UP: ${uptimeString}`);
+            client.user.setActivity(`Online: ${online} Uptime: ${uptimeString}`);
             onlineLast = online;
         }
         connection.destroy();
