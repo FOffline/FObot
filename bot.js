@@ -48,8 +48,8 @@ function bot_FOnline()
         {
             console.log( (new Date).toLocaleTimeString() + " Online: " + online);
 
-            var date = new Date( Math.round( uptimeRaw * 1000 ) );
-            uptimeString = date.getHours() + "h";
+            let uptimeHours = Math.floor(uptimeRaw / 3600);
+             uptimeString = uptimeHours + "h";
 
             change = Math.abs(onlineLast - online);
 
@@ -72,7 +72,7 @@ function bot_FOnline()
 
         connection.on('error', function (err)
         {
-            client.user.setActivity("Bad omen! Can't reach Core!")
+            client.user.setActivity("Offline")
             connection.destroy();
         });
 
