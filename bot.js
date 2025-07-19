@@ -1,86 +1,98 @@
 const token = process.env.TOKEN;
 const serverAddress = process.env.SERVER_ADDRESS;
-const serverPort = process.env.SERVER_PORT;
+const serverPort = parseInt(process.env.SERVER_PORT, 10);
 
-const net      = require('net');
+if (!token || !serverAddress || isNaN(serverPort)) {
+    console.error("Missing or invalid environment variables. Please set TOKEN, SERVER_ADDRESS, and SERVER_PORT.");
+    process.exit(1);
+}
+
+const net = require('net');
 const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client(
-{
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
-	],
+    ],
 });
 
-client.on("ready", function()
-{
+client.on("ready", () => {
+    console.log(`Bot is ready! Logged in as ${client.user.tag}`);
     bot_FOnline();
 });
 
 client.login(token);
 
-let buff = Buffer.from( [0xFF, 0xFF, 0xFF, 0xFF] );
+const buff = Buffer.from([0xFF, 0xFF, 0xFF, 0xFF]);
 let onlineLast = 0;
 
-function bot_FOnline()
-{
-    try
-    {
-        var connection = new net.Socket();
+function bot_FOnline() {
+    try {
+        const connection = new net.Socket();
         connection.setTimeout(10000);
 
-        connection.connect(serverPort, serverAddress, function()
-        {
+        connection.connect(serverPort, serverAddress, () => {
             connection.write(buff);
         });
 
-        connection.on('data', function (data)
-        {
-        var buffer = Buffer.from(' ', "hex" );
-        buffer = Buffer.concat([buffer, Buffer.from(data, "hex" )]);
+        connection.on('data', (data) => {
+            if (data.length >= 8) {
+                const online = data.readUInt32LE(0);
+                const uptimeRaw = data.readUInt32LE(4);
+                console.log(`${(new Date).toLocaleTimeString()} Online: ${online}`);
 
-        online = buffer.readUInt32LE(0);
-        uptimeRaw = buffer.readUInt32LE(4);
+                const totalHours = Math.floor(uptimeRaw / 3600);
+                const days = Math.floor(totalHours / 24);
+                const uptimeString = totalHours >= 24 ? `${days}d` : `${totalHours}h`;
 
-        if (online != '')
-        {
-            console.log( (new Date).toLocaleTimeString() + " Online: " + online);
+                let changeSymbol;
+                if (onlineLast < online) {
+                    changeSymbol = `▲`;
+                } else if (onlineLast > online) {
+                    changeSymbol = `▼`;
+                } else {
+                    changeSymbol = `●`;
+                }
 
-            let uptimeHours = Math.floor(uptimeRaw / 3600);
-             uptimeString = uptimeHours + "h";
-
-            change = Math.abs(onlineLast - online);
-
-            if( onlineLast < online && (online - onlineLast) > 5 )
-                changeString = `+${change} ⇑`;
-            else if( onlineLast < online )
-                changeString = `+${change} ⇗`;
-            else if( onlineLast > online && (onlineLast - online) > 5  )
-                changeString = `-${change} ⇓`;
-            else if( onlineLast > online )
-                changeString = `-${change} ⇘`;
-            else
-                changeString = `-`;
-
-            client.user.setActivity(`Online: ${online} Uptime: ${uptimeString}`);
-            onlineLast = online;
-        }
-        connection.destroy();
-        });
-
-        connection.on('error', function (err)
-        {
-            client.user.setActivity("Offline")
+                if (client?.user) {
+                    client.user.setActivity(`${online} ${changeSymbol} Upt: ${uptimeString}`);
+                }
+                onlineLast = online;
+            } else {
+                console.warn("Received less than 8 bytes from server, cannot parse online and uptime.");
+                if (client?.user) {
+                    client.user.setActivity("Data Error");
+                }
+            }
             connection.destroy();
         });
 
+        connection.on('error', (err) => {
+            console.error(`Connection error: ${err.message}`);
+            if (client?.user) {
+                client.user.setActivity("Offline");
+            }
+            connection.destroy();
+        });
+
+        connection.on('timeout', () => {
+            console.warn("Connection timed out.");
+            if (client?.user) {
+                client.user.setActivity("Offline (Timeout)");
+            }
+            connection.destroy();
+        });
+
+        // Schedule next poll
         setTimeout(bot_FOnline, 60000);
-    }
-    catch (error)
-    {
-        console.log(error);
+    } catch (error) {
+        console.error("Unexpected error in bot_FOnline:", error);
+        if (client?.user) {
+            client.user.setActivity("Error");
+        }
+        setTimeout(bot_FOnline, 60000);
     }
 }
 
