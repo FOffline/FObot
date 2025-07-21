@@ -49,9 +49,9 @@ function bot_FOnline() {
 
                 let changeSymbol;
                 if (onlineLast < online) {
-                    changeSymbol = `▲`;
+                    changeSymbol = `🡅`;
                 } else if (onlineLast > online) {
-                    changeSymbol = `▼`;
+                    changeSymbol = `🡇`;
                 } else {
                     changeSymbol = `●`;
                 }
