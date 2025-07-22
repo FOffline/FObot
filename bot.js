@@ -45,7 +45,15 @@ function bot_FOnline() {
 
                 const totalHours = Math.floor(uptimeRaw / 3600);
                 const days = Math.floor(totalHours / 24);
-                const uptimeString = totalHours >= 24 ? `${days} days` : `${totalHours} hours`;
+                if (totalHours === 1) {
+                    uptimeString = "1 hour";
+                } else if (totalHours > 1 && totalHours < 24) {
+                    uptimeString = `${totalHours} hours`;
+                } else if (days === 1) {
+                    uptimeString = "1 day";
+                } else {
+                    uptimeString = `${days} days`;
+                }
 
                 let changeSymbol;
                 if (onlineLast < online) {
