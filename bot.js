@@ -8,7 +8,7 @@ if (!token || !serverAddress || isNaN(serverPort)) {
 }
 
 const net = require('net');
-const { Client, GatewayIntentBits, ActivityType } = require('discord.js'); // Re-added ActivityType to destructuring
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js'); 
 
 const client = new Client({
     intents: [
@@ -57,26 +57,27 @@ function bot_FOnline() {
 
                 let changeSymbol;
                 if (onlineLast < online) {
-                    changeSymbol = `🡅`;
+                    changeSymbol = `🟡`;
                 } else if (onlineLast > online) {
-                    changeSymbol = `🡇`;
+                    changeSymbol = `🔴`;
                 } else {
-                    changeSymbol = `●`;
+                    changeSymbol = `🟢`;
                 }
 
                 if (client?.user) {
-                    client.user.setActivity({
-                        name: `${changeSymbol} ${online} players | Upt: ${uptimeString}`, // Status text
-                        type: ActivityType.Custom // Set type to Custom
-                    });
-                }
+                const playerText = online === 1 ? 'wastelander' : 'wastelanders'; 
+                client.user.setActivity({
+                    name: `${changeSymbol} ${online} ${playerText}  🕒 ${uptimeString}`, 
+                    type: ActivityType.Custom 
+                });
+            }}
                 onlineLast = online;
             } else {
                 console.warn("Received less than 8 bytes from server, cannot parse online and uptime.");
                 if (client?.user) {
                     client.user.setActivity({
                         name: "🕱 Data Error 🕱",
-                        type: ActivityType.Custom // Set type to Custom
+                        type: ActivityType.Custom 
                     });
                 }
             }
@@ -88,7 +89,7 @@ function bot_FOnline() {
             if (client?.user) {
                 client.user.setActivity({
                     name: "🕱 Offline 🕱",
-                    type: ActivityType.Custom // Set type to Custom
+                    type: ActivityType.Custom 
                 });
             }
             connection.destroy();
@@ -99,7 +100,7 @@ function bot_FOnline() {
             if (client?.user) {
                 client.user.setActivity({
                     name: "🕱 Offline (Timeout) 🕱",
-                    type: ActivityType.Custom // Set type to Custom
+                    type: ActivityType.Custom 
                 });
             }
             connection.destroy();
@@ -112,7 +113,7 @@ function bot_FOnline() {
         if (client?.user) {
             client.user.setActivity({
                 name: "🕱 Error 🕱",
-                type: ActivityType.Custom // Set type to Custom
+                type: ActivityType.Custom 
             });
         }
         setTimeout(bot_FOnline, 60000);
