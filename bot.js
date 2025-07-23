@@ -1,5 +1,3 @@
-const path = require('path');
-const fs = require('fs');
 const net = require('net');
 const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 
@@ -20,24 +18,8 @@ const client = new Client({
     ],
 });
 
-const GIF_FILE_PATH = path.join(__dirname, 'bot_avatar.gif');
-
 client.once("ready", async () => {
     console.log(`Bot is ready! Logged in as ${client.user.tag}`);
-
-    if (!fs.existsSync(GIF_FILE_PATH)) {
-        console.error(`Error: GIF file not found at ${GIF_FILE_PATH}`);
-        console.log('Please ensure "bot_avatar.gif" is in the same directory as the script.');
-    } else {
-        try {
-            const avatarBuffer = fs.readFileSync(GIF_FILE_PATH);
-            await client.user.setAvatar(avatarBuffer);
-            console.log('Bot avatar has been successfully set to the animated GIF!');
-        } catch (error) {
-            console.error('Failed to set bot avatar:', error);
-        }
-    }
-
     bot_FOnline();
 });
 
