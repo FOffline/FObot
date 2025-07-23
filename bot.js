@@ -38,6 +38,7 @@ function bot_FOnline() {
         connection.setTimeout(10000);
 
         connection.connect(serverPort, serverAddress, () => {
+            console.log(`Connected to server at ${serverAddress}:${serverPort}`);
             connection.write(buff);
         });
 
@@ -50,14 +51,19 @@ function bot_FOnline() {
                 const totalHours = Math.floor(uptimeRaw / 3600);
                 const days = Math.floor(totalHours / 24);
                 let uptimeString;
-                if (totalHours === 1) {
-                    uptimeString = "1 hour";
-                } else if (totalHours > 1 && totalHours < 24) {
-                    uptimeString = `${totalHours} hours`;
-                } else if (days === 1) {
-                    uptimeString = "1 day";
+
+                if (totalHours < 24) {
+                    if (totalHours === 1) {
+                        uptimeString = "1 hour";
+                    } else {
+                        uptimeString = `${totalHours} hours`;
+                    }
                 } else {
-                    uptimeString = `${days} days`;
+                    if (days === 1) {
+                        uptimeString = "1 day";
+                    } else {
+                        uptimeString = `${days} days`;
+                    }
                 }
 
                 let changeSymbol;
@@ -73,7 +79,7 @@ function bot_FOnline() {
                 if (online === 0) {
                     onlineTierSymbol = `⚫`;
                 } else if (online >= 1 && online <= 9) {
-                    onlineTierSymbol = `🔴`;
+                    onlineTierSymbol = `�`;
                 } else if (online >= 10 && online <= 19) {
                     onlineTierSymbol = `🟠`;
                 } else if (online >= 20 && online <= 29) {
