@@ -79,7 +79,7 @@ function bot_FOnline() {
                 if (online === 0) {
                     onlineTierSymbol = `⚫`;
                 } else if (online >= 1 && online <= 9) {
-                    onlineTierSymbol = `�`;
+                    onlineTierSymbol = `🔴`;
                 } else if (online >= 10 && online <= 19) {
                     onlineTierSymbol = `🟠`;
                 } else if (online >= 20 && online <= 29) {
