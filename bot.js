@@ -117,7 +117,7 @@ function bot_FOnline() {
             console.warn("Connection timed out.");
             if (client?.user) {
                 client.user.setActivity({
-                    name: "⛔ Offline! (Timeout)",
+                    name: "⛔ Offline!",
                     type: ActivityType.Custom
                 });
             }
