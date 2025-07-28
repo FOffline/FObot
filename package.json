@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["discord", "bot", "fonline", "status", "game", "nodejs"],
   "author": "Lucek",
+  "year": 2025,
   "originalAuthor": "Zaika",
   "license": "GPL-3.0",
   "dependencies": {
