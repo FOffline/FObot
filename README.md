@@ -1,15 +1,27 @@
-<img width="1200" height="800" alt="fobot" src="https://github.com/user-attachments/assets/01d5b89c-dd23-4329-bb0b-f8aef365592e" />
+<img width="513" height="258" alt="fobot" src="https://github.com/user-attachments/assets/11053caf-1597-44b8-adcb-576fee8ea284" />
 
-A simple Node.js-based Discord status bot for FOnline. Reworked old Zaika code.
+A simple Node.js-based Discord status bot for FOnline (reworked old Zaika code).
+
+#
+
+Added variables validation, more logs and statuses in case of errors, and other minor code improvements.
+
+New ajustable status display based on ActivityType.Custom. 
+
+More to come.
+
+#
 
 <img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/1895c3ff-b7b5-4f5f-bed8-f414712f7df7" />
+
+[symbol based on total online][symbol based on gain/loss in comparison to previous ping][total online + text][symbol][uptime + text]
 
 #
 
 Docker / Podman:
 1. Build container image ```docker build -t fonline-bot .```
 1. Create and run the container ```docker run -d -p 44861:44861 --name fo-bot -e TOKEN={token-goes-here} -e SERVER_ADDRESS=game.fonline-aop.net -e SERVER_PORT=4000 fonline-bot```
-History of online can be viewed through logs of container:
+1. History of online can be viewed through logs of container:
 ```docker container logs fo-bot```
 
 Normal:
