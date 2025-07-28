@@ -1,7 +1,7 @@
 {
   "name": "FObot",
   "version": "1.0.0",
-  "description": "A simple Discord status bot for FOnline powered by Node.js.",
+  "description": "A simple Node.js-based Discord status bot for FOnline",
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
