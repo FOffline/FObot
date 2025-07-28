@@ -6,7 +6,7 @@ A simple Node.js-based Discord status bot for FOnline (reworked old Zaika code).
 
 Added variables validation, more logs and statuses in case of errors, and other minor code improvements.
 
-New ajustable status display based on ActivityType.Custom. 
+New adjustable status display based on ActivityType.Custom. 
 
 More to come.
 
