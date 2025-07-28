@@ -1,13 +1,14 @@
 {
-  "name": "fonline-bot",
-  "version": "2.0",
-  "description": "",
+  "name": "FObot",
+  "version": "1.0.0",
+  "description": "A simple Discord status bot for FOnline powered by Node.js.",
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Zaika",
+  "author": "Lucek",
+  "originalAuthor": "Zaika",
   "license": "GPL-3.0",
   "dependencies": {
     "discord.js": "latest"
