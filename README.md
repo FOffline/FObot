@@ -24,8 +24,8 @@ Docker / Podman:
 1. History of online can be viewed through logs of container:
 ```docker container logs fo-bot```
 
-Normal:
-1. Fill out the token, server IP address and server port number constants inside bot.js
+Classic:
+1. Fill out the token, server IP address and server port number constants inside bot.js or handle that via environment variables on your hosting
 1. Install dependencies ```npm install```
 1. Run the bot ```node bot.js```
 
