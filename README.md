@@ -30,3 +30,6 @@ Classic:
 1. Run the bot ```node bot.js```
 
 #
+
+Latest build:
+https://github.com/FOffline/FObot/releases/tag/v1.0.0
