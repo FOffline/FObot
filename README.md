@@ -12,15 +12,6 @@ More to come.
 
 #
 
-<img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/1895c3ff-b7b5-4f5f-bed8-f414712f7df7" />
-
-<img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/561fc6c8-1003-48ed-90e5-4efc64dc881e" />
-
-
-[symbol based on total online][symbol based on gain/loss in comparison to previous ping][total online + text][symbol][uptime + text]
-
-#
-
 Docker / Podman:
 1. Build container image ```docker build -t fonline-bot .```
 1. Create and run the container ```docker run -d -p 44861:44861 --name fo-bot -e TOKEN={token-goes-here} -e SERVER_ADDRESS=game.fonline-aop.net -e SERVER_PORT=4000 fonline-bot```
@@ -34,5 +25,14 @@ Classic:
 
 #
 
-Latest build:
+Latest builds:
+
+
 https://github.com/FOffline/FObot/releases/tag/v1.0.0
+<img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/1895c3ff-b7b5-4f5f-bed8-f414712f7df7" />
+
+<img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/561fc6c8-1003-48ed-90e5-4efc64dc881e" />
+
+
+[symbol based on total online][symbol based on gain/loss in comparison to previous ping][total online + text][symbol][uptime + text]
+
