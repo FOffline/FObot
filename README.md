@@ -29,6 +29,7 @@ Latest builds:
 
 
 https://github.com/FOffline/FObot/releases/tag/v1.0.0
+
 <img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/1895c3ff-b7b5-4f5f-bed8-f414712f7df7" />
 
 <img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/561fc6c8-1003-48ed-90e5-4efc64dc881e" />
