@@ -30,7 +30,6 @@ client.on('error', error => {
 client.login(token);
 
 const buff = Buffer.from([0xFF, 0xFF, 0xFF, 0xFF]);
-let onlineLast = 0;
 
 function bot_FOnline() {
     try {
@@ -53,49 +52,18 @@ function bot_FOnline() {
                 let uptimeString;
 
                 if (totalHours < 24) {
-                    if (totalHours === 1) {
-                        uptimeString = "1 hour";
-                    } else {
-                        uptimeString = `${totalHours} hours`;
-                    }
+                    uptimeString = totalHours === 1 ? "1 hour" : `${totalHours} hours`;
                 } else {
-                    if (days === 1) {
-                        uptimeString = "1 day";
-                    } else {
-                        uptimeString = `${days} days`;
-                    }
-                }
-
-                let changeSymbol;
-                if (onlineLast < online) {
-                    changeSymbol = `🡅`;
-                } else if (onlineLast > online) {
-                    changeSymbol = `🡇`;
-                } else {
-                    changeSymbol = `●`;
-                }
-
-                let onlineTierSymbol;
-                if (online === 0) {
-                    onlineTierSymbol = `⚫`;
-                } else if (online >= 1 && online <= 9) {
-                    onlineTierSymbol = `🔴`;
-                } else if (online >= 10 && online <= 19) {
-                    onlineTierSymbol = `🟠`;
-                } else if (online >= 20 && online <= 29) {
-                    onlineTierSymbol = `🟡`;
-                } else {
-                    onlineTierSymbol = `🔥`;
+                    uptimeString = days === 1 ? "1 day" : `${days} days`;
                 }
 
                 if (client?.user) {
                     const playerText = online === 1 ? 'player' : 'players';
                     client.user.setActivity({
-                        name: `${onlineTierSymbol} ${changeSymbol} ${online} ${playerText} 🕒 ${uptimeString}`,
+                        name: `⚡ ${online} ${playerText} 🕒 ${uptimeString}`,
                         type: ActivityType.Custom
                     });
                 }
-                onlineLast = online;
             } else {
                 console.warn("Received less than 8 bytes from server, cannot parse online and uptime.");
                 if (client?.user) {
