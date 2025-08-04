@@ -27,8 +27,16 @@ Classic:
 
 Latest builds:
 
+https://github.com/FOffline/FObot/releases/edit/v1.0.1 (basic)
 
-https://github.com/FOffline/FObot/releases/tag/v1.0.0
+<img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/07c2bfd3-b082-4c83-9f62-7432e095d26b" />
+
+
+[symbol][total online + text][symbol][uptime + text]
+
+*
+
+https://github.com/FOffline/FObot/releases/tag/v1.0.0 (extended)
 
 <img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/1895c3ff-b7b5-4f5f-bed8-f414712f7df7" />
 
