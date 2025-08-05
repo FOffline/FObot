@@ -31,6 +31,8 @@ https://github.com/FOffline/FObot/releases/edit/v1.0.1 (basic)
 
 <img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/07c2bfd3-b082-4c83-9f62-7432e095d26b" />
 
+<img width="265" height="106" alt="image" src="https://github.com/user-attachments/assets/120ad121-5500-4e02-92c2-09849e124009" />
+
 
 [symbol][total online + text][symbol][uptime + text]
 
