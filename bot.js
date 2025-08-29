@@ -18,7 +18,7 @@ const client = new Client({
     ],
 });
 
-client.once("ready", async () => {
+client.once("clientReady", async () => {
     console.log(`Bot is ready! Logged in as ${client.user.tag}`);
     bot_FOnline();
 });
