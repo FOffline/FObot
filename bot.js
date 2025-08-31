@@ -97,8 +97,6 @@ function bot_FOnline() {
             }
             connection.destroy();
         });
-
-        setTimeout(bot_FOnline, 60000);
     } catch (error) {
         console.error("Unexpected error in bot_FOnline:", error);
         if (client?.user) {
@@ -107,6 +105,7 @@ function bot_FOnline() {
                 type: ActivityType.Custom
             });
         }
+    } finally {
         setTimeout(bot_FOnline, 60000);
     }
 }
