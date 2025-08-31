@@ -104,7 +104,7 @@ function bot_FOnline() {
                     });
                 } else {
                     client.user.setActivity({
-                        name: "⚠️ Connection timed out!",
+                        name: "⚠️ Connection error!",
                         type: ActivityType.Custom
                     });
                 }
