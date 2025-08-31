@@ -68,7 +68,7 @@ function bot_FOnline() {
                 console.warn("Received less than 8 bytes from server, cannot parse online and uptime.");
                 if (client?.user) {
                     client.user.setActivity({
-                        name: "⚠️ Data Error!",
+                        name: "⚠️ Data error!",
                         type: ActivityType.Custom
                     });
                 }
@@ -80,7 +80,7 @@ function bot_FOnline() {
             console.error(`Connection error: ${err.message}`);
             if (client?.user) {
                 client.user.setActivity({
-                    name: "⛔ Offline!",
+                    name: "⛔ Server offline!",
                     type: ActivityType.Custom
                 });
             }
@@ -91,7 +91,7 @@ function bot_FOnline() {
             console.warn("Connection timed out.");
             if (client?.user) {
                 client.user.setActivity({
-                    name: "⛔ Offline!",
+                    name: "⚠️ Connection error!",
                     type: ActivityType.Custom
                 });
             }
@@ -103,7 +103,7 @@ function bot_FOnline() {
         console.error("Unexpected error in bot_FOnline:", error);
         if (client?.user) {
             client.user.setActivity({
-                name: "⚠️ Error!",
+                name: "⚠️ Bot error!",
                 type: ActivityType.Custom
             });
         }
